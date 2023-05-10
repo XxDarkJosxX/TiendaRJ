@@ -138,11 +138,11 @@
                         $datausuario = array(
                             'nombreuser'=>$nombreuser,
                             'email'=>$stremail,
-                            'asunto'=>'Recuperar cuenta - '.NOMBRE_REMITENTE,
+                            'asunto'=>'Bienvenido - '.NOMBRE_REMITENTE,
                             'urlrecuperacion'=>$urlrecuperar
                         );
 
-                        $sendemail= sendEmail($datausuario,'emailcambiopassword');
+                        $sendemail= sendEmail($datausuario,'emailbienvenidauser');
 
 
                     }
