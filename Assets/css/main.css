@@ -14865,7 +14865,7 @@ be a descendant of the grid when it is being dragged.
 .app-content {
 
 
-  height: 100%;
+  height: 95.4%;
 
   margin-top: 50px;
   padding: 30px;
@@ -14873,6 +14873,7 @@ be a descendant of the grid when it is being dragged.
   -webkit-transition: margin-left 0.3s ease;
   -o-transition: margin-left 0.3s ease;
   transition: margin-left 0.3s ease;
+  
 }
 
 @media (min-width: 768px) {
