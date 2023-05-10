@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded",function(){
         "resonsieve":"true",
         "bDestroy":true,
         "iDisplayLength":10,
-        "order":[[1,"desc"]]
+        "order": [[1, "desc"], [2, "asc"]]
 
     });
 
