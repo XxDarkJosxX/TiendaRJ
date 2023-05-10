@@ -14873,10 +14873,6 @@ be a descendant of the grid when it is being dragged.
   -webkit-transition: margin-left 0.3s ease;
   -o-transition: margin-left 0.3s ease;
   transition: margin-left 0.3s ease;
-
-  position: fixed;
-    height: 100%;
-    width: 89%;
 }
 
 @media (min-width: 768px) {
