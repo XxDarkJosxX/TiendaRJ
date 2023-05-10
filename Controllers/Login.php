@@ -64,7 +64,7 @@
 
                         }else{
                             $arrresponse= array('status'=>false,'msg'=>'Usuario inactivo o suspendido');
-                            $_SESSION['attempts']=0;
+                         
                         }
                     }
 
