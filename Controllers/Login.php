@@ -33,21 +33,28 @@
                     
                     if(empty($requestuser)){
                         
-                        
-                        if(empty($_SESSION['attempts']) || $_SESSION['attempts'] == 0){
-                            $_SESSION['attempts']=1;
-                        }else{
-                            $_SESSION['attempts']+=1;
+                        $emaildata = $this->model->getuseremail($struser);
 
+                        if(!empty($emaildata)){
+                            if(empty($_SESSION['attempts']) || $_SESSION['attempts'] == 0){
+                                $_SESSION['attempts']=1;
+                            }else{
+                                $_SESSION['attempts']+=1;
+    
+                                
+                            }
+    
+                            if($_SESSION['attempts'] >= 3){
+                                $arrdata= $this->model->deactivateuser($struser);
+                                $arrresponse= array('status'=>false,'msg'=>'Usuario inactivo o suspendido'.$_SESSION['attempts']);
+                            }else{
+                                $arrresponse= array('status'=>false,'msg'=>'El usuario o contraseña es incorrectos'.$_SESSION['attempts']);
+                            }
                             
-                        }
-
-                        if($_SESSION['attempts'] >= 3){
-                            $arrdata= $this->model->deactivateuser($struser);
-                            $arrresponse= array('status'=>false,'msg'=>'Usuario inactivo o suspendido'.$_SESSION['attempts']);
                         }else{
                             $arrresponse= array('status'=>false,'msg'=>'El usuario o contraseña es incorrectos'.$_SESSION['attempts']);
                         }
+                       
                         
                     }else{
                         $arrdata=$requestuser;
