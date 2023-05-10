@@ -5,6 +5,9 @@ html{
   margin: 0px;
   height: 95.4%;
 }
+body{
+  height: 100%;
+}
 .TituloP {
   font-size: none ;
 
