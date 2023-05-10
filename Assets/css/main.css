@@ -14876,7 +14876,7 @@ be a descendant of the grid when it is being dragged.
 
   position: fixed;
     height: 100%;
-    width: 85%;
+    width: 100%;
 }
 
 @media (min-width: 768px) {
