@@ -85,6 +85,10 @@
 
                 $intidrol=intval($_POST['txtrol']);
 
+                $inombre = strtoupper(substr($strnombre, 0, 1)); 
+                $iapellido1 = strtoupper(substr($strapellido, 0, 1)); // M
+                $iapellido2 = strtoupper(substr($strapellido, strpos($strapellido, ' ') + 1, 1)); // D
+
                 if($idUsuario == 0)
                 {
                     $option = 1;
