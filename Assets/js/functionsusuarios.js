@@ -24,7 +24,10 @@ document.addEventListener("DOMContentLoaded",function(){
         "resonsieve":"true",
         "bDestroy":true,
         "iDisplayLength":10,
-        "order": [[0, "desc"], [1, "asc"]]
+        "order":[[0,"desc"]],
+        "columnDefs": [
+            { "type": "num", "targets": 0 }
+        ]
 
     });
 
