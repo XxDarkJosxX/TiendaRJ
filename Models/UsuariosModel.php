@@ -8,12 +8,16 @@
         public $strapellido;
         public $strcorreo;
         public $strcontrasenia;
+        public $strpassword;
         public $intstatus;
         public $inttelefono;
         public $intci;
+        public $strci;
         public $strdireccion;
         public $intnit;
         public $strnombretr;
+        public $strtoken;
+ 
   
 
         public function __construct() {
@@ -211,17 +215,17 @@
 
 
         public function getuseremail(string $email){
-            $this->struser=$email;
+            $this->strcorreo=$email;
          
-            $sql= "SELECT IdUsuario, Nombre, Apellido, Estado FROM tusuarios WHERE Correo='$this->struser' AND Estado = 1";
+            $sql= "SELECT IdUsuario, Nombre, Apellido, Estado FROM tusuarios WHERE Correo='$this->strcorreo' AND Estado = 1";
             $request=$this->select($sql);
             return $request;
         }
 
-        public function settokenuser(int $iduser, string $tokrn){
-            $this->intiduser = $iduser;
+       public function settokenuser(int $iduser, string $tokrn){
+            $this->intidusuario = $iduser;
             $this->strtoken= $tokrn;
-            $queryupdate="UPDATE tusuarios SET Token = ? WHERE IdUsuario=$this->intiduser";
+            $queryupdate="UPDATE tusuarios SET Token = ? WHERE IdUsuario=$this->intidusuario";
             $arrdata = array($this->strtoken);
             $requestupdate= $this->update($queryupdate,$arrdata);
             return $requestupdate;

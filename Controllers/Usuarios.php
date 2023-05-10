@@ -126,17 +126,24 @@
                 if($requestusuario > 0){
 
                     if($option == 1 ){
+
                         $arrresponse= array('status'=>true,'msg'=>'Datos Guardados Correctamente');
                         $nombreuser= $strnombre.' '.$strapellido;
                         $stremail= $strcorreo;
+                        $token= token();
+
+                        $urlrecuperar= base_url().'/Login/confirmuser/'.$stremail.'/'.$token;
+                        $requestupdate = $this->model->settokenuser($requestusuario,$token);
+
                         $datausuario = array(
                             'nombreuser'=>$nombreuser,
                             'email'=>$stremail,
-                            'password'=>$strpassword,
-                            'asunto'=>'Bienvenido a tu tienda en línea'
-                         
+                            'asunto'=>'Recuperar cuenta - '.NOMBRE_REMITENTE,
+                            'urlrecuperacion'=>$urlrecuperar
                         );
-                        sendEmail($datausuario,'emailbienvenida');
+
+                        $sendemail= sendEmail($datausuario,'emailcambiopassword');
+
 
                     }
                     if($option == 2 ){
