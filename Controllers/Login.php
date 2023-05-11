@@ -82,7 +82,7 @@
                         }
                     }else{
                         $requestuser= $this->model->logiclient($struser,$strpassword);
-                    
+                        $_SESSION['attempts']=0;
                         if(empty($requestuser)){
                             $arrresponse= array('status'=>false,'msg'=>'El usuario o contraseña es incorrectos');
                         }else{
