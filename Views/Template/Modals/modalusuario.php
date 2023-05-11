@@ -66,7 +66,7 @@
           <div class="form-row">
              <div class="form-group col-md-6">
               <label class="control-label">Contraseña</label>
-              <input type="text" class="form-control" id="txtcontrasenia" name="txtcontrasenia" minlength="8" maxlength="20" pattern="[a-zA-Z0-9@.-]{8,20}" placeholder="Contraseña">
+              <input type="hidden" class="form-control" id="txtcontrasenia" name="txtcontrasenia" minlength="8" maxlength="20" pattern="[a-zA-Z0-9@.-]{8,20}" placeholder="Contraseña">
             </div>
             <div class="form-group col-md-6">
               <label for="exampleSelect1">Estado</label>
