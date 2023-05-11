@@ -17,7 +17,7 @@
         public $intnit;
         public $strnombretr;
         public $strtoken;
- 
+        public $strusercode;
   
 
         public function __construct() {
@@ -227,6 +227,18 @@
             $this->strtoken= $tokrn;
             $queryupdate="UPDATE tusuarios SET Token = ? WHERE IdUsuario=$this->intidusuario";
             $arrdata = array($this->strtoken);
+            $requestupdate= $this->update($queryupdate,$arrdata);
+            return $requestupdate;
+                
+        }
+
+        ////////////////////////////
+        public function setusercode(int $iduser, string $usercode){
+            $this->intidusuario = $iduser;
+            $this->strusercode= $usercode;
+
+            $queryupdate="UPDATE tusuarios SET Nombreusuario = ? WHERE IdUsuario=$this->intidusuario";
+            $arrdata = array($this->strusercode);
             $requestupdate= $this->update($queryupdate,$arrdata);
             return $requestupdate;
                 

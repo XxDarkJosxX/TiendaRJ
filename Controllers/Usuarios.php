@@ -85,9 +85,26 @@
 
                 $intidrol=intval($_POST['txtrol']);
 
+                //Varibles de generacion de usuario
+
                 $inombre = strtoupper(substr($strnombre, 0, 1)); 
-                $iapellido1 = strtoupper(substr($strapellido, 0, 1)); // M
-                $iapellido2 = strtoupper(substr($strapellido, strpos($strapellido, ' ') + 1, 1)); // D
+                $apellido1 = strtoupper(substr($strapellido, 0, 1)); // M
+                $apellido2 = '';
+                
+                $posicion_espacio = strpos($strapellido, ' ');
+                if ($posicion_espacio !== false) {
+                    $apellido2 = strtoupper(substr($strapellido, $posicion_espacio + 1, 1)); // D
+                }
+
+                $num1 = rand(0, 9);
+                $num2 = rand(0, 9);
+                $num3 = rand(0, 9);
+                $num4 = rand(0, 9);
+                
+                $aleatorios = intval($num1 . $num2 . $num3 . $num4);
+          
+
+                //=============================================
 
                 if($idUsuario == 0)
                 {
@@ -131,6 +148,8 @@
 
                     if($option == 1 ){
 
+                        $codigousuario=$inombre.$apellido1.$apellido2.$aleatorios.$requestusuario;
+
                         $arrresponse= array('status'=>true,'msg'=>'Datos Guardados Correctamente');
                         $nombreuser= $strnombre.' '.$strapellido;
                         $stremail= $strcorreo;
@@ -138,6 +157,8 @@
 
                         $urlrecuperar= base_url().'/Login/confirmuser/'.$stremail.'/'.$token;
                         $requestupdate = $this->model->settokenuser($requestusuario,$token);
+
+                        $requestupdate = $this->model->setusercode($requestusuario,$codigousuario);
 
                         $datausuario = array(
                             'nombreuser'=>$nombreuser,
