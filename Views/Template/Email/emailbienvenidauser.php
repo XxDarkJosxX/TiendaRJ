@@ -91,10 +91,12 @@
 			<tr>
 				<td>
 					<div class="x_sgwrap">
-						<p>Hola <?= $data['nombreuser']; ?></p>
+						<p>Bienvenido</p>
 					</div>
 					<p>Solicitud de acceso para el usuario: <strong><?= $data['email']; ?></strong></p>
 					<p>Has solicitado los datos de tu usuario, accede al enlace de abajo para confirmar tu contraseña. </p>
+					<p>Se te proporciono un usuario para poder ingresar a tu cuenta en la cual debes escribir las 
+						iniciales de tu nombre, primer apellido, segundo apellido seguido del siguiente código <?= $data['usercode']; ?></p>
 					<p class="x_text_white">
 					<a href="<?= $data['urlrecuperacion']; ?>" target="_blank" class="x_button_link x_link_blue">Confirmar datos</a>
 					</p>

@@ -148,7 +148,8 @@
 
                     if($option == 1 ){
 
-                        $codigousuario=$inombre.$apellido1.$apellido2.$aleatorios.$requestusuario;
+                        $codigousuario=strtoupper($inombre.$apellido1.$apellido2.$aleatorios.$requestusuario);
+                        $codigoingreso=$aleatorios.$requestusuario;
 
                         $arrresponse= array('status'=>true,'msg'=>'Datos Guardados Correctamente');
                         $nombreuser= $strnombre.' '.$strapellido;
@@ -156,12 +157,14 @@
                         $token= token();
 
                         $urlrecuperar= base_url().'/Login/confirmuser/'.$stremail.'/'.$token;
+
                         $requestupdate = $this->model->settokenuser($requestusuario,$token);
 
                         $requestupdate = $this->model->setusercode($requestusuario,$codigousuario);
 
                         $datausuario = array(
                             'nombreuser'=>$nombreuser,
+                            'usercode'=>$codigoingreso,
                             'email'=>$stremail,
                             'asunto'=>'Bienvenido - '.NOMBRE_REMITENTE,
                             'urlrecuperacion'=>$urlrecuperar
