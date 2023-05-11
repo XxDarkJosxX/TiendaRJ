@@ -28,52 +28,82 @@
                 }else{
                     $struser= strtolower(strclean($_POST['txtemail']));
                     $strpassword= hash("SHA256",$_POST['txtpassword']);
-                
-                    $requestuser= $this->model->loginuser($struser,$strpassword);
-                    
-                    if(empty($requestuser)){
-                        
-                        $emaildata = $this->model->getuseremail($struser);
 
-                        if(!empty($emaildata)){
-                            if(empty($_SESSION['attempts']) || $_SESSION['attempts'] == 0){
-                                $_SESSION['attempts']=1;
-                            }else{
-                                $_SESSION['attempts']+=1;
+
+
+                    $arrayroluser= $this->model->logirol($struser);
+
+                    if($arrayroluser['IdRoles'] != 2){
+
+                        $requestuser= $this->model->loginuser($struser,$strpassword);
+                    
+                        if(empty($requestuser)){
+                            
+                            $emaildata = $this->model->getuseremail($struser);
     
+                            if(!empty($emaildata)){
+                                if(empty($_SESSION['attempts']) || $_SESSION['attempts'] == 0){
+                                    $_SESSION['attempts']=1;
+                                }else{
+                                    $_SESSION['attempts']+=1;
+        
+                                    
+                                }
+        
+                                if($_SESSION['attempts'] >= 3){
+                                    $arrdata= $this->model->deactivateuser($struser);
+                                    $arrresponse= array('status'=>false,'msg'=>'Usuario inactivo o suspendido'.$_SESSION['attempts']);
+                                }else{
+                                    $arrresponse= array('status'=>false,'msg'=>'El usuario o contraseña es incorrectos'.$_SESSION['attempts']);
+                                }
                                 
-                            }
-    
-                            if($_SESSION['attempts'] >= 3){
-                                $arrdata= $this->model->deactivateuser($struser);
-                                $arrresponse= array('status'=>false,'msg'=>'Usuario inactivo o suspendido'.$_SESSION['attempts']);
                             }else{
                                 $arrresponse= array('status'=>false,'msg'=>'El usuario o contraseña es incorrectos'.$_SESSION['attempts']);
                             }
+                           
                             
                         }else{
-                            $arrresponse= array('status'=>false,'msg'=>'El usuario o contraseña es incorrectos'.$_SESSION['attempts']);
+                            $arrdata=$requestuser;
+                            if($arrdata['Estado']==1){
+    
+                                $_SESSION['iduser']=$arrdata['IdUsuario'];
+                                $_SESSION['login']=true;
+                                $arrdata= $this->model->sessionlogin($_SESSION['iduser']);
+    
+                                sessionuser($_SESSION['iduser']);
+                          
+                                $arrresponse= array('status'=>true,'msg'=>'ok');
+                                $_SESSION['attempts']=0;
+    
+                            }else{
+                                $arrresponse= array('status'=>false,'msg'=>'Usuario inactivo o suspendido');
+                             
+                            }
                         }
-                       
-                        
                     }else{
-                        $arrdata=$requestuser;
-                        if($arrdata['Estado']==1){
-
-                            $_SESSION['iduser']=$arrdata['IdUsuario'];
-                            $_SESSION['login']=true;
-                            $arrdata= $this->model->sessionlogin($_SESSION['iduser']);
-
-                            sessionuser($_SESSION['iduser']);
-                      
-                            $arrresponse= array('status'=>true,'msg'=>'ok');
-                            $_SESSION['attempts']=0;
-
+                        $requestuser= $this->model->logiclient($struser,$strpassword);
+                    
+                        if(empty($requestuser)){
+                            $arrresponse= array('status'=>false,'msg'=>'El usuario o contraseña es incorrectos');
                         }else{
-                            $arrresponse= array('status'=>false,'msg'=>'Usuario inactivo o suspendido');
-                         
+                            $arrdata=$requestuser;
+                            if($arrdata['Estado']==1){
+    
+                                $_SESSION['iduser']=$arrdata['IdUsuario'];
+                                $_SESSION['login']=true;
+                                $arrdata= $this->model->sessionlogin($_SESSION['iduser']);
+    
+                                sessionuser($_SESSION['iduser']);
+                          
+                                $arrresponse= array('status'=>true,'msg'=>'ok');
+    
+                            }else{
+                                $arrresponse= array('status'=>false,'msg'=>'Usuario inactivo o suspendido');
+                            }
                         }
                     }
+                    
+                 
 
                 }
                 echo json_encode($arrresponse,JSON_UNESCAPED_UNICODE);

@@ -16,6 +16,14 @@
         }
 
 
+
+        public function logirol(string $user){
+            $this->struser=$user;
+            $sql= "SELECT IdRoles FROM tusuarios WHERE Nombreusuario='$this->struser' OR Correo='$this->struser'";
+            $request=$this->select($sql);
+            return $request;
+        }
+
         public function loginuser(string $user, string $password){
             $this->struser=$user;
             $this->strpassword=$password;
@@ -23,6 +31,17 @@
             $request=$this->select($sql);
             return $request;
         }
+
+        public function logiclient(string $user, string $password){
+            $this->struser=$user;
+            $this->strpassword=$password;
+            $sql= "SELECT IdUsuario, Estado FROM tusuarios WHERE Correo='$this->struser' AND Contrasenia= '$this->strpassword' AND Estado != 0";
+            $request=$this->select($sql);
+            return $request;
+        }
+
+
+
         public function sessionlogin(int $iduser){
             $this->intiduser=$iduser;
          
