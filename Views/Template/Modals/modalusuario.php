@@ -64,10 +64,11 @@
           </div>
 
           <div class="form-row">
-             <div class="form-group col-md-6">
-              <label class="control-label">Contraseña</label>
+
+            
               <input type="hidden" class="form-control" id="txtcontrasenia" name="txtcontrasenia" minlength="8" maxlength="20" pattern="[a-zA-Z0-9@.-]{8,20}" placeholder="Contraseña">
-            </div>
+           
+
             <div class="form-group col-md-6">
               <label for="exampleSelect1">Estado</label>
               <select class="form-control" id="liststatus" name="liststatus" placeholder="Estado">
