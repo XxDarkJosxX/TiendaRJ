@@ -33,6 +33,16 @@ document.addEventListener("DOMContentLoaded", function () {
             return false;
         }
 
+        var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{12,}$/;
+        if (!regex.test(strcontrasenia)) {
+            swal(
+                "Contraseña inválida",
+                "La contraseña debe tener al menos 12 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.",
+                "error"
+            );
+            return false;
+        }
+
         var request = window.XMLHttpRequest
             ? new XMLHttpRequest()
             : new ActiveXObject("Microsoft.XMLHTTP");
