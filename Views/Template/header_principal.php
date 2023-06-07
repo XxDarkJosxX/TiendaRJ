@@ -19,6 +19,10 @@
     <link href="<?= media(); ?>/fontawesome/css/brands.css" rel="stylesheet">
     <link href="<?= media(); ?>/fontawesome/css/solid.css" rel="stylesheet">
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
+  
+
 </head>
 
 <body>

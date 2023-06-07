@@ -1,5 +1,6 @@
-document.addEventListener("DOMContentLoaded", function () {
+// Agrega la referencia a la librería zxcvbn en tu HTML
 
+document.addEventListener("DOMContentLoaded", function () {
     var formusuarios = document.querySelector("#formclientes");
 
     formusuarios.onsubmit = function (e) {
@@ -11,12 +12,31 @@ document.addEventListener("DOMContentLoaded", function () {
         var strcorreo = document.querySelector("#txtcorreo").value;
         var strcontrasenia = document.querySelector("#txtcontrasenia").value;
 
-        if (strnombre == '' || strapellido == '' || strcorreo == '' || strdireccion == '' || intci == '' || strcontrasenia == '') {
+        if (
+            strnombre == "" ||
+            strapellido == "" ||
+            strcorreo == "" ||
+            strcontrasenia == ""
+        ) {
             swal("Atención", "Los campos con (*) son obligatorios.", "error");
             return false;
         }
-        var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        var ajaxUrl = baseurl + '/Registrarse/setregistrarse';
+
+        // Validación de contraseña con zxcvbn
+        var passwordStrength = zxcvbn(strcontrasenia);
+        if (passwordStrength.score < 3) {
+            swal(
+                "Contraseña débil",
+                "Por favor, elija una contraseña más segura.",
+                "error"
+            );
+            return false;
+        }
+
+        var request = window.XMLHttpRequest
+            ? new XMLHttpRequest()
+            : new ActiveXObject("Microsoft.XMLHTTP");
+        var ajaxUrl = baseurl + "/Registrarse/setregistrarse";
         var formdata = new FormData(formusuarios);
         request.open("POST", ajaxUrl, true);
         request.send(formdata);
@@ -24,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (request.readyState == 4 && request.status == 200) {
                 console.log(request.responseText);
                 var obdata = JSON.parse(request.responseText);
-        
+
                 if (obdata.status) {
                     formusuarios.reset();
                     swal("", obdata.msg, "success");
@@ -32,6 +52,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     swal("Error", obdata.msg, "error");
                 }
             }
-        }
-    }
+        };
+    };
 }, false);
